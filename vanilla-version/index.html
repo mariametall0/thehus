@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Une question pour toi mon amour... 💌</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Pluie d'effets visuels -->
+  <div class="hearts-sky" id="heartsSky"></div>
+
+  <!-- ========================================================
+       PHASE 1 : L'ENVELOPPE FERMÉE (Style iMessage / Motion.so)
+       ======================================================== -->
+  <div class="envelope-wrapper" id="envelopeScreen">
+    <div class="imessage-bubble">
+      <p>Je peux te poser une question stp ? 👉👈</p>
+    </div>
+    
+    <div class="envelope-card" id="envelopeBtn">
+      <div class="envelope-back"></div>
+      <div class="envelope-flap"></div>
+      <div class="envelope-pocket"></div>
+      <div class="envelope-letter-peek">
+        <span class="letter-stamp">❤️</span>
+      </div>
+      <div class="envelope-heart-seal">❤️</div>
+    </div>
+    
+    <div class="envelope-caption">
+      <strong>Demande de Date 💌</strong>
+      <span>Touche l'enveloppe pour ouvrir</span>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       PHASE 2 : LA QUESTION DU DATE (Avec le chat kawaii & bouton Non farceur)
+       ======================================================== -->
+  <main class="main-card hidden" id="mainCard">
+    
+    <!-- Étape 1 : Le chat qui supplie (PLEASE) -->
+    <section class="card-step active" id="dateProposalStep">
+      <div class="please-badge" id="pleaseText">P L E A S E</div>
+      
+      <!-- Sticker de chat kawaii animé en SVG vectoriel mignon -->
+      <div class="cat-illustration-box" id="catBox">
+        <!-- SVG d'un adorable chaton aux yeux brillants style TikTok viral -->
+        <svg class="cat-svg" id="catSvg" viewBox="0 0 200 200" width="180" height="180">
+          <!-- Corps et tête -->
+          <ellipse cx="100" cy="140" rx="65" ry="45" fill="#ffffff" stroke="#333333" stroke-width="4.5" />
+          <ellipse cx="100" cy="100" rx="68" ry="55" fill="#ffffff" stroke="#333333" stroke-width="4.5" />
+          
+          <!-- Oreilles -->
+          <path d="M 45 65 Q 40 25 72 45 Z" fill="#ffffff" stroke="#333333" stroke-width="4.5" />
+          <path d="M 50 60 Q 48 35 68 48 Z" fill="#ffb4c2" />
+          
+          <path d="M 155 65 Q 160 25 128 45 Z" fill="#ffffff" stroke="#333333" stroke-width="4.5" />
+          <path d="M 150 60 Q 152 35 132 48 Z" fill="#ffb4c2" />
+          
+          <!-- Joues roses -->
+          <ellipse cx="55" cy="115" rx="12" ry="8" fill="#ffb0c0" opacity="0.8" />
+          <ellipse cx="145" cy="115" rx="12" ry="8" fill="#ffb0c0" opacity="0.8" />
+          
+          <!-- Yeux larmoyants / brillants adorables -->
+          <g id="happyEyes">
+            <ellipse cx="70" cy="95" rx="13" ry="15" fill="#222" />
+            <circle cx="66" cy="90" r="5" fill="#fff" />
+            <circle cx="75" cy="101" r="3" fill="#fff" />
+            
+            <ellipse cx="130" cy="95" rx="13" ry="15" fill="#222" />
+            <circle cx="126" cy="90" r="5" fill="#fff" />
+            <circle cx="135" cy="101" r="3" fill="#fff" />
+          </g>
+
+          <!-- Bouche de chaton :3 -->
+          <path id="catMouth" d="M 92 110 Q 100 116 100 110 Q 100 116 108 110" fill="none" stroke="#333" stroke-width="3.5" stroke-linecap="round" />
+          
+          <!-- Pattes jointes qui supplient "PLEASE" -->
+          <g id="catPaws" transform="translate(0, 0)">
+            <ellipse cx="86" cy="135" rx="12" ry="16" fill="#fff" stroke="#333" stroke-width="4" transform="rotate(-15 86 135)" />
+            <ellipse cx="114" cy="135" rx="12" ry="16" fill="#fff" stroke="#333" stroke-width="4" transform="rotate(15 114 135)" />
+          </g>
+
+          <!-- Petites étincelles dorées kawaii -->
+          <path d="M 32 90 L 35 80 L 38 90 L 48 93 L 38 96 L 35 106 L 32 96 L 22 93 Z" fill="#ffd166" />
+          <path d="M 168 90 L 171 80 L 174 90 L 184 93 L 174 96 L 171 106 L 168 96 L 158 93 Z" fill="#ffd166" />
+        </svg>
+      </div>
+
+      <h1 class="proposal-question" id="proposalTitle">Tu veux qu'on se fasse un date en amoureux ? 🌸</h1>
+      <p class="couple-subtitle">Même si on est déjà ensemble, je veux encore et toujours t'inviter ! 🥰</p>
+
+      <!-- Boutons interactifs : OUI grandit, NON s'enfuit et fait des blagues ! -->
+      <div class="proposal-buttons" id="btnGroup">
+        <button class="btn-vote btn-yes" id="yesBtn">
+          <span>OUI 💕</span>
+        </button>
+        
+        <button class="btn-vote btn-no" id="noBtn">
+          <span>Non</span>
+        </button>
+      </div>
+
+      <div class="refusal-hint" id="noHint"></div>
+    </section>
+
+    <!-- ========================================================
+         PHASE 3 : "YAYYY !" + CHOIX DU DATE & DE L'HUMEUR
+         ======================================================== -->
+    <section class="card-step" id="dateCustomizerStep">
+      <div class="yay-banner">
+        <span class="yay-sticker">🎉🥰</span>
+        <h2>Yaaay ! C'est un rencard ! 💖</h2>
+        <p class="subtitle">Dis-moi comment tu te sens et ce qui te ferait plaisir :</p>
+      </div>
+
+      <!-- 1. Comment tu te sens ? -->
+      <div class="section-block">
+        <label class="block-title">1. Comment va mon cœur aujourd'hui ? 💭</label>
+        <div class="sticker-options" id="moodGrid">
+          <button type="button" class="sticker-chip active" data-group="mood" data-value="En pleine forme & tout(e) heureux(se) ✨">
+            <span class="chip-emoji">🥰</span>
+            <span class="chip-text">En pleine forme ✨</span>
+          </button>
+          <button type="button" class="sticker-chip" data-group="mood" data-value="Un peu fatigué(e) par la journée 🥱">
+            <span class="chip-emoji">🥱</span>
+            <span class="chip-text">Fatigué(e) 🥱</span>
+          </button>
+          <button type="button" class="sticker-chip" data-group="mood" data-value="Besoin d'un gros câlin réconfortant 🧸">
+            <span class="chip-emoji">🧸</span>
+            <span class="chip-text">Besoin de câlin 🧸</span>
+          </button>
+          <button type="button" class="sticker-chip" data-group="mood" data-value="Trop hâte de te serrer dans mes bras 💖">
+            <span class="chip-emoji">💖</span>
+            <span class="chip-text">Trop hâte de toi 💖</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Qu'est-ce qu'on mange ? -->
+      <div class="section-block">
+        <label class="block-title">2. Qu'est-ce qu'on mange pour notre date ? 🍕</label>
+        <div class="sticker-options" id="foodGrid">
+          <button type="button" class="sticker-chip active" data-group="food" data-value="Des sushis 🍣">
+            <span class="chip-emoji">🍣</span>
+            <span class="chip-text">Sushi</span>
+          </button>
+          <button type="button" class="sticker-chip" data-group="food" data-value="Une bonne pizza 🍕">
+            <span class="chip-emoji">🍕</span>
+            <span class="chip-text">Pizza</span>
+          </button>
+          <button type="button" class="sticker-chip" data-group="food" data-value="Burgers gourmands 🍔">
+            <span class="chip-emoji">🍔</span>
+            <span class="chip-text">Burger</span>
+          </button>
+          <button type="button" class="sticker-chip" data-group="food" data-value="Un petit resto chic romantique 🍝">
+            <span class="chip-emoji">🍝</span>
+            <span class="chip-text">Resto romantique</span>
+          </button>
+          <button type="button" class="sticker-chip" data-group="food" data-value="Cuisiner ensemble en amoureux 👩‍🍳">
+            <span class="chip-emoji">🍳</span>
+            <span class="chip-text">On cuisine à deux</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. Le programme de la soirée -->
+      <div class="section-block">
+        <label class="block-title">3. Le programme parfait après manger : 🎬</label>
+        <div class="sticker-options" id="planGrid">
+          <button type="button" class="sticker-chip active" data-group="plan" data-value="Film / Série sous le plaid 🎬">
+            <span class="chip-emoji">🎬</span>
+            <span class="chip-text">Film sous le plaid</span>
+          </button>
+          <button type="button" class="sticker-chip" data-group="plan" data-value="Massage & papouilles illimitées 💆">
+            <span class="chip-emoji">💆</span>
+            <span class="chip-text">Massage relaxant</span>
+          </button>
+          <button type="button" class="sticker-chip" data-group="plan" data-value="Petite balade main dans la main 🚶">
+            <span class="chip-emoji">🚶</span>
+            <span class="chip-text">Balade en amoureux</span>
+          </button>
+          <button type="button" class="sticker-chip" data-group="plan" data-value="S'endormir direct blottis l'un contre l'autre 💤">
+            <span class="chip-emoji">💤</span>
+            <span class="chip-text">Dodo câlin</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 4. Petit mot doux libre -->
+      <div class="section-block">
+        <label class="block-title" for="loveMessage">4. Un petit mot pour ton amoureux(se) ? 💌</label>
+        <textarea id="loveMessage" rows="2" placeholder="Ex: Hâte d'être ce soir mon cœur..."></textarea>
+      </div>
+
+      <button class="btn-submit-date" id="generateSummaryBtn">
+        <span>Confirmer notre date 💖</span>
+      </button>
+    </section>
+
+    <!-- ========================================================
+         PHASE 4 : RÉCAPITULATIF FINAL & ENVOI SUR WHATSAPP
+         ======================================================== -->
+    <section class="card-step" id="recapStep">
+      <div class="final-header">
+        <div class="final-cat-badge">😻💍</div>
+        <h2>C'est officiel ! Notre Date est réservé 💌</h2>
+        <p class="subtitle">Voici ta réponse prête à m'envoyer :</p>
+      </div>
+
+      <div class="date-ticket" id="dateTicket">
+        <!-- Rempli en JS -->
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn-whatsapp-send" id="whatsappBtn">
+          <span class="wa-icon">📱</span>
+          <span>Envoyer à mon amour sur WhatsApp</span>
+        </button>
+
+        <button class="btn-copy-clip" id="copyTextBtn">
+          <span>Copier le message 📋</span>
+        </button>
+      </div>
+
+      <div class="copy-alert" id="copyAlert">Message copié ! Tu peux lui coller par message 💕</div>
+
+      <div class="restart-wrapper">
+        <button class="restart-link" id="resetBtn">Recommencer 🔄</button>
+      </div>
+    </section>
+
+    <footer class="card-watermark">
+      <span>Fait avec amour pour mon couple 💕</span>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

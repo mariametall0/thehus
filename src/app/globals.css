@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Pacifico&display=swap');
+
+:root {
+  --color-primary: #ff5277;
+  --color-soft-bg: #fff2f5;
+}
+
+body {
+  font-family: 'Comfortaa', cursive, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: radial-gradient(circle at 20% 15%, #ffe6ed 0%, #fff0f4 35%, #ffdce5 70%, #fad2dc 100%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  color: #2b1f22;
+}
+
+/* Scrollbar personnalisée rose poudrée */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #ffeef2;
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb {
+  background: #ff9cb2;
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff6b8b;
+}
+
+/* Animations d'ambiance */
+@keyframes floatUp {
+  0% {
+    transform: translateY(105vh) scale(0.6) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.85;
+  }
+  80% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1.2) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+.animate-float {
+  animation: floatUp 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes softGlow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.8;
+  }
+}
+
+.animate-glow {
+  animation: softGlow 6s ease-in-out infinite;
+}

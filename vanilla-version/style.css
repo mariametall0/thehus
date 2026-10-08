@@ -1,0 +1,566 @@
+/* ==========================================================
+   STYLE VIRAL TIKTOK / MOTION.SO - DATE POUR MON COUPLE 💖
+   ========================================================== */
+
+:root {
+  --bg-gradient: linear-gradient(180deg, #fcecee 0%, #f9dbe1 100%);
+  --card-bg: #ffffff;
+  --primary-pink: #ff6584;
+  --dark-pink: #e04868;
+  --soft-pink: #fff0f3;
+  --border-pink: #ffccd5;
+  --green-yes: #2ec475;
+  --green-hover: #27ae60;
+  --red-no: #ff526c;
+  --text-dark: #2d2325;
+  --text-muted: #786467;
+  --radius-card: 28px;
+  --shadow-card: 0 16px 40px rgba(255, 101, 132, 0.16);
+  --font-main: 'Comfortaa', cursive, -apple-system, sans-serif;
+  --font-romantic: 'Pacifico', cursive;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 14px;
+  color: var(--text-dark);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Ciels de cœurs flottants */
+.hearts-sky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.sky-heart {
+  position: absolute;
+  color: rgba(255, 101, 132, 0.25);
+  user-select: none;
+  animation: floatUpSky 7s linear infinite;
+}
+
+@keyframes floatUpSky {
+  0% { transform: translateY(105vh) scale(0.6); opacity: 0; }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.8; }
+  100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
+}
+
+/* ==========================================================
+   PHASE 1 : ENVELOPPE STYLE IMESSAGE
+   ========================================================== */
+.envelope-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  animation: fadeIn 0.5s ease;
+  width: 100%;
+  max-width: 380px;
+}
+
+.imessage-bubble {
+  background: #e9e9eb;
+  padding: 12px 18px;
+  border-radius: 20px 20px 20px 4px;
+  color: #000;
+  font-size: 0.95rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  margin-bottom: 24px;
+  animation: popBubble 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popBubble {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* L'enveloppe */
+.envelope-card {
+  width: 220px;
+  height: 150px;
+  background: #fff;
+  border-radius: 14px;
+  position: relative;
+  box-shadow: 0 14px 35px rgba(255, 101, 132, 0.22);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.envelope-card:hover {
+  transform: translateY(-6px) scale(1.04);
+}
+
+.envelope-card:active {
+  transform: scale(0.97);
+}
+
+.envelope-pocket {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 110px solid #fcecee;
+  border-right: 110px solid #fcecee;
+  border-bottom: 80px solid #f8d5db;
+  border-radius: 0 0 14px 14px;
+  z-index: 2;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 110px solid transparent;
+  border-right: 110px solid transparent;
+  border-top: 85px solid #ffccd5;
+  transform-origin: top;
+  transition: transform 0.4s ease;
+  z-index: 3;
+}
+
+.envelope-heart-seal {
+  position: absolute;
+  top: 60px;
+  font-size: 32px;
+  z-index: 4;
+  animation: pulseSeal 1.6s infinite ease-in-out;
+}
+
+@keyframes pulseSeal {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.22); }
+}
+
+.envelope-caption {
+  margin-top: 20px;
+  text-align: center;
+  color: var(--text-dark);
+}
+
+.envelope-caption strong {
+  display: block;
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+  color: var(--primary-pink);
+}
+
+.envelope-caption span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================
+   CARTE PRINCIPALE (Motion.so style)
+   ========================================================== */
+.main-card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--card-bg);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 34px 26px;
+  z-index: 2;
+  position: relative;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.main-card.hidden {
+  display: none;
+}
+
+.card-step {
+  display: none;
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.card-step.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ==========================================================
+   PHASE 2 : LA DEMANDE AVEC LE CHAT
+   ========================================================== */
+.please-badge {
+  text-align: center;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: 5px;
+  color: #555;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0 #fff;
+}
+
+.cat-illustration-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.cat-svg {
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.06));
+  animation: wiggleCat 3s ease-in-out infinite;
+}
+
+@keyframes wiggleCat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(1deg); }
+}
+
+.proposal-question {
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary-pink);
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
+
+.couple-subtitle {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+/* Boutons OUI & Non (Viral behavior) */
+.proposal-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  min-height: 90px;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.btn-vote {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+  border-radius: 99px;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+
+.btn-yes {
+  background: var(--green-yes);
+  color: #fff;
+  padding: 16px 36px;
+  font-size: 1.25rem;
+  box-shadow: 0 8px 22px rgba(46, 196, 117, 0.35);
+  transform-origin: center;
+}
+
+.btn-yes:hover {
+  background: var(--green-hover);
+  box-shadow: 0 10px 26px rgba(46, 196, 117, 0.45);
+}
+
+.btn-no {
+  background: var(--red-no);
+  color: #fff;
+  padding: 12px 26px;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 18px rgba(255, 82, 108, 0.25);
+  user-select: none;
+  transition: transform 0.2s ease, font-size 0.2s ease, opacity 0.2s ease;
+}
+
+.refusal-hint {
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--dark-pink);
+  min-height: 22px;
+  margin-top: 8px;
+}
+
+/* ==========================================================
+   PHASE 3 : PERSONNALISATION DU DATE
+   ========================================================== */
+.yay-banner {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.yay-sticker {
+  font-size: 52px;
+  display: block;
+  margin-bottom: 6px;
+  animation: popBubble 0.4s ease;
+}
+
+.yay-banner h2 {
+  font-size: 1.35rem;
+  color: var(--primary-pink);
+  margin-bottom: 4px;
+}
+
+.yay-banner .subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.section-block {
+  margin-bottom: 18px;
+}
+
+.block-title {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.sticker-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sticker-chip {
+  background: #fff;
+  border: 1.5px solid var(--border-pink);
+  border-radius: 99px;
+  padding: 8px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  transition: all 0.2s ease;
+}
+
+.sticker-chip:hover {
+  border-color: var(--primary-pink);
+  transform: translateY(-2px);
+}
+
+.sticker-chip.active {
+  background: var(--soft-pink);
+  border-color: var(--primary-pink);
+  color: var(--dark-pink);
+  box-shadow: 0 4px 12px rgba(255, 101, 132, 0.2);
+  transform: scale(1.03);
+}
+
+.chip-emoji {
+  font-size: 1.15rem;
+}
+
+textarea#loveMessage {
+  width: 100%;
+  border: 1.5px solid var(--border-pink);
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  outline: none;
+  resize: vertical;
+  color: var(--text-dark);
+  background: #fff;
+}
+
+textarea#loveMessage:focus {
+  border-color: var(--primary-pink);
+}
+
+.btn-submit-date {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 99px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(255, 101, 132, 0.35);
+  margin-top: 10px;
+  transition: transform 0.2s ease;
+}
+
+.btn-submit-date:hover {
+  transform: translateY(-2px);
+}
+
+/* ==========================================================
+   PHASE 4 : TICKET FINAL & PARTAGE WHATSAPP
+   ========================================================== */
+.final-header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.final-cat-badge {
+  font-size: 48px;
+  margin-bottom: 6px;
+}
+
+.final-header h2 {
+  font-size: 1.3rem;
+  color: var(--primary-pink);
+  margin-bottom: 4px;
+}
+
+.date-ticket {
+  background: #fff;
+  border: 2px dashed var(--primary-pink);
+  border-radius: 18px;
+  padding: 20px 18px;
+  margin-bottom: 22px;
+  background-color: #fff9fa;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.ticket-row {
+  margin-bottom: 8px;
+}
+
+.ticket-label {
+  font-weight: 700;
+  color: var(--primary-pink);
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-whatsapp-send {
+  background: #25d366;
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 99px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 8px 22px rgba(37, 211, 102, 0.35);
+  transition: all 0.2s ease;
+}
+
+.btn-whatsapp-send:hover {
+  background: #20be5b;
+  transform: translateY(-2px);
+}
+
+.btn-copy-clip {
+  background: #fff;
+  border: 1.5px solid var(--border-pink);
+  color: var(--text-dark);
+  padding: 12px;
+  border-radius: 99px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-copy-clip:hover {
+  background: var(--soft-pink);
+}
+
+.copy-alert {
+  display: none;
+  background: var(--primary-pink);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  border-radius: 99px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.restart-wrapper {
+  text-align: center;
+  margin-top: 14px;
+}
+
+.restart-link {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.card-watermark {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================
+   Pluie de confettis / bisous viraux
+   ========================================================== */
+.party-pop {
+  position: fixed;
+  user-select: none;
+  pointer-events: none;
+  z-index: 99999;
+  animation: fallPop 2s ease forwards;
+}
+
+@keyframes fallPop {
+  0% { transform: translateY(-20px) rotate(0deg) scale(0.6); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(540deg) scale(1.2); opacity: 0; }
+}
