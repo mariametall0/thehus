@@ -11,7 +11,7 @@ import RecapScreen from '@/components/RecapScreen';
 export default function Home() {
   const [step, setStep] = useState<0 | 1 | 2 | 3>(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
-  const userName = "Soulmate";
+  const [userName, setUserName] = useState<string>("Soulmate");
 
   return (
     <>
@@ -27,6 +27,7 @@ export default function Home() {
           {step === 1 && (
             <ProposalScreen
               userName={userName}
+              onSelectUser={setUserName}
               onAccept={() => setStep(2)}
             />
           )}

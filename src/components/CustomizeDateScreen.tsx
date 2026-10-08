@@ -363,16 +363,18 @@ export default function CustomizeDateScreen({ userName, onComplete }: CustomizeD
               Bravo {userName}... 💕
             </h3>
             <p className="text-xs text-gray-700 leading-relaxed mb-4">
-              Tu as déjà fait la moitié du chemin ! Merci de t'ouvrir à moi avec autant de sincérité. Tu es tellement précieux à mes yeux.
+              {userName === 'Sa Chérie'
+                ? "Tu as déjà fait la moitié du chemin ! Merci de t'ouvrir avec autant de sincérité. Tu es tellement précieuse à ses yeux."
+                : "Tu as déjà fait la moitié du chemin ! Merci de t'ouvrir à moi avec autant de sincérité. Tu es tellement précieux à mes yeux."}
             </p>
             <div className="bg-pink-50 border border-pink-200 rounded-2xl p-3 mb-5 text-[11px] text-pink-700 italic">
-              « Respire un coup mon cœur... la seconde moitié devient encore plus croustillante et intime... 😏🔥 »
+              « Respire un coup... la seconde moitié devient encore plus croustillante et intime... 😏🔥 »
             </div>
             <button
               onClick={handleResumeAfterSurprise}
               className="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold py-3 px-6 rounded-full shadow-lg shadow-pink-500/30 text-sm flex items-center justify-center gap-2 hover:opacity-95 transition-all"
             >
-              <span>Continuer avec ma chérie</span>
+              <span>{userName === 'Sa Chérie' ? 'Continuer pour mon Soulmate' : 'Continuer avec ma chérie'}</span>
               <span>➜</span>
             </button>
           </div>

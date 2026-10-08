@@ -16,6 +16,7 @@ interface Submission {
 export default function ReponsesPage() {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedFilter, setSelectedFilter] = useState<'all' | 'Soulmate' | 'Sa Chérie'>('all');
 
   const fetchAnswers = async () => {
     setLoading(true);
@@ -36,6 +37,11 @@ export default function ReponsesPage() {
     fetchAnswers();
   }, []);
 
+  const filteredSubmissions = submissions.filter((sub) => {
+    if (selectedFilter === 'all') return true;
+    return sub.userName === selectedFilter;
+  });
+
   return (
     <div className="min-h-screen w-full max-w-2xl mx-auto p-4 sm:p-6 z-10 relative">
       <FloatingHearts />
@@ -49,20 +55,55 @@ export default function ReponsesPage() {
           <span>⬅️</span>
           <span>Retour à l'accueil du jeu</span>
         </Link>
-        <h1 className="text-2xl sm:text-3xl font-bold text-pink-600 mb-1">
-          L'Espace Privé de la Chérie 👑💖
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-pink-600 mb-1 drop-shadow-xs">
+          Le Journal Secret de Toi & Moi 👑💖
         </h1>
         <p className="text-xs text-gray-600 max-w-md mx-auto">
-          Retrouve ici toutes les réponses et confidences envoyées directement par ton Soulmate sur le site.
+          Retrouvez ici toutes vos confidences et réponses partagées. Que ce soit lui ou elle qui réponde, tout est réuni ici !
         </p>
 
-        <div className="mt-3">
+        {/* Boutons d'action et filtres */}
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+          <button
+            onClick={() => setSelectedFilter('all')}
+            className={`text-xs px-3.5 py-1.5 rounded-full font-semibold transition-all border ${
+              selectedFilter === 'all'
+                ? 'bg-pink-500 text-white border-pink-500 shadow-sm'
+                : 'bg-white/80 text-gray-600 border-pink-200 hover:bg-pink-50'
+            }`}
+          >
+            Toutes les réponses ({submissions.length})
+          </button>
+          <button
+            onClick={() => setSelectedFilter('Soulmate')}
+            className={`text-xs px-3.5 py-1.5 rounded-full font-semibold transition-all border flex items-center gap-1 ${
+              selectedFilter === 'Soulmate'
+                ? 'bg-pink-500 text-white border-pink-500 shadow-sm'
+                : 'bg-white/80 text-gray-600 border-pink-200 hover:bg-pink-50'
+            }`}
+          >
+            <span>👑</span>
+            <span>Mon Soulmate</span>
+          </button>
+          <button
+            onClick={() => setSelectedFilter('Sa Chérie')}
+            className={`text-xs px-3.5 py-1.5 rounded-full font-semibold transition-all border flex items-center gap-1 ${
+              selectedFilter === 'Sa Chérie'
+                ? 'bg-pink-500 text-white border-pink-500 shadow-sm'
+                : 'bg-white/80 text-gray-600 border-pink-200 hover:bg-pink-50'
+            }`}
+          >
+            <span>🎀</span>
+            <span>Sa Chérie</span>
+          </button>
+
           <button
             onClick={fetchAnswers}
-            className="text-xs bg-white border border-pink-200 text-pink-600 font-semibold px-4 py-1.5 rounded-full shadow-xs hover:bg-pink-50 transition-all inline-flex items-center gap-1.5"
+            title="Rafraîchir"
+            className="text-xs bg-white border border-pink-200 text-pink-600 font-semibold px-3 py-1.5 rounded-full shadow-xs hover:bg-pink-50 transition-all inline-flex items-center gap-1"
           >
             <span>🔄</span>
-            <span>Actualiser les réponses</span>
+            <span>Actualiser</span>
           </button>
         </div>
       </header>
@@ -73,25 +114,26 @@ export default function ReponsesPage() {
           <span className="text-3xl block animate-spin mb-2">⏳</span>
           <p className="text-xs text-gray-500 font-medium">Chargement des confidences...</p>
         </div>
-      ) : submissions.length === 0 ? (
+      ) : filteredSubmissions.length === 0 ? (
         <div className="bg-white/90 backdrop-blur-md rounded-3xl p-8 text-center shadow-lg border border-pink-100">
           <span className="text-5xl block mb-3 animate-bounce">💌🥺</span>
           <h2 className="text-base font-bold text-gray-800 mb-1">
-            Aucune réponse enregistrée pour l'instant
+            Aucune réponse trouvée pour l'instant
           </h2>
           <p className="text-xs text-gray-500 max-w-xs mx-auto mb-4">
-            Dès que ton Soulmate aura terminé de répondre aux 20 questions sur le site, tout apparaîtra ici comme par magie !
+            Dès que l'un de vous deux aura terminé de répondre aux 20 questions sur le site, tout apparaîtra ici comme par magie !
           </p>
           <Link
             href="/"
             className="text-xs text-pink-500 underline font-semibold"
           >
-            Aller tester le jeu ➜
+            Aller jouer au jeu ➜
           </Link>
         </div>
       ) : (
         <div className="space-y-6">
-          {submissions.map((sub, idx) => {
+          {filteredSubmissions.map((sub, idx) => {
+            const isCherie = sub.userName === 'Sa Chérie';
             const dateObj = new Date(sub.submittedAt);
             const formattedDate = dateObj.toLocaleDateString('fr-FR', {
               day: '2-digit',
@@ -110,7 +152,11 @@ export default function ReponsesPage() {
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b border-pink-100 pb-3 mb-4">
                   <div>
                     <span className="text-xs font-extrabold text-pink-600 uppercase tracking-wide flex items-center gap-1.5">
-                      <span>💌</span> Confidences de {sub.userName}
+                      <span>{isCherie ? '🎀' : '👑'}</span>
+                      <span>Confidences de {sub.userName}</span>
+                      <span className="text-pink-400 font-normal">
+                        ({isCherie ? 'Pour son Soulmate' : 'Pour sa Chérie'})
+                      </span>
                     </span>
                     <span className="text-[11px] text-gray-400 block mt-0.5">
                       Reçu le {formattedDate}
@@ -130,7 +176,15 @@ export default function ReponsesPage() {
                     <span className="text-[10px] text-amber-500 font-mono">#VALIDE</span>
                   </div>
                   <p className="text-[11px] text-gray-700 leading-relaxed">
-                    Il a validé son pass pour : <strong>1 Massage complet</strong> + <strong>son repas préféré préparé par toi</strong> + <strong>dodo collés toute la nuit</strong> + <strong>interdiction de lui dire non ce soir !</strong> 👑
+                    {isCherie ? (
+                      <>
+                        Elle a validé son pass pour : <strong>1 Massage complet</strong> + <strong>son repas préféré préparé ou commandé par son Soulmate</strong> + <strong>dodo blottie dans ses bras toute la nuit</strong> + <strong>interdiction de lui dire non ce soir !</strong> 👑
+                      </>
+                    ) : (
+                      <>
+                        Il a validé son pass pour : <strong>1 Massage complet</strong> + <strong>son repas préféré préparé par sa chérie</strong> + <strong>dodo collés toute la nuit</strong> + <strong>interdiction de lui dire non ce soir !</strong> 👑
+                      </>
+                    )}
                   </p>
                 </div>
 
@@ -141,7 +195,7 @@ export default function ReponsesPage() {
 
                 <div className="space-y-3">
                   {ENTRE_NOUS_QUESTIONS.map((q) => {
-                    const ans = sub.answers[q.id];
+                    const ans = sub.answers ? sub.answers[q.id] : undefined;
                     return (
                       <div
                         key={q.id}

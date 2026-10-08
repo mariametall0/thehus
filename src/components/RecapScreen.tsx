@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { ENTRE_NOUS_QUESTIONS } from './CustomizeDateScreen';
 
 interface RecapScreenProps {
@@ -14,7 +15,10 @@ export default function RecapScreen({ userName, answers, onReset }: RecapScreenP
   const [isSaved, setIsSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(true);
 
-  // Sauvegarde automatique des réponses sur le site pour la chérie !
+  const isCherie = userName === 'Sa Chérie';
+  const partnerName = isCherie ? 'ton Soulmate' : 'ta chérie';
+
+  // Sauvegarde automatique des réponses sur le site !
   useEffect(() => {
     const saveAnswers = async () => {
       try {
@@ -42,7 +46,7 @@ export default function RecapScreen({ userName, answers, onReset }: RecapScreenP
 
 🎟️ TICKET PRIVILÈGE DÉBLOQUÉ :
 ✨ 1 Massage complet sans limite de temps
-🍔 Mon plat préféré préparé par ma chérie
+🍔 Mon plat préféré préparé avec amour
 💤 Dodo collé(e)s toute la nuit
 👑 Interdiction de me dire non ce soir !
 
@@ -71,15 +75,15 @@ ${ENTRE_NOUS_QUESTIONS.map((q) => {
         {isSaving ? (
           <>
             <span className="animate-spin">⏳</span>
-            <span>Transmission de tes réponses à ta chérie...</span>
+            <span>Transmission de tes réponses à {partnerName}...</span>
           </>
         ) : isSaved ? (
           <>
             <span className="text-base">💌✔</span>
-            <span>Tes réponses ont été envoyées directement à ta chérie sur le site !</span>
+            <span>Tes réponses ont été envoyées directement à {partnerName} sur le site !</span>
           </>
         ) : (
-          <span>Tes réponses sont prêtes pour ta chérie !</span>
+          <span>Tes réponses sont prêtes pour {partnerName} !</span>
         )}
       </div>
 
@@ -88,7 +92,7 @@ ${ENTRE_NOUS_QUESTIONS.map((q) => {
       </p>
 
       {/* ========================================================
-          LE TICKET PRIVILÈGE SOULMATE (DÉBLOQUÉ)
+          LE TICKET PRIVILÈGE (DÉBLOQUÉ)
           ======================================================== */}
       <div className="bg-gradient-to-br from-amber-50 via-rose-50 to-pink-100 border-2 border-amber-300 rounded-2xl p-4 text-left shadow-md mb-5 relative overflow-hidden">
         <div className="absolute top-2 right-2 text-2xl opacity-40">🎟️</div>
@@ -106,10 +110,10 @@ ${ENTRE_NOUS_QUESTIONS.map((q) => {
             <span className="text-pink-500">✔</span> 1 Massage complet sans limite de temps 💆
           </li>
           <li className="flex items-center gap-1.5">
-            <span className="text-pink-500">✔</span> Ton repas préféré préparé par ta chérie 🍳
+            <span className="text-pink-500">✔</span> {isCherie ? 'Ton plat préféré préparé ou commandé par ton Soulmate 🍳🍕' : 'Ton repas préféré préparé par ta chérie 🍳'}
           </li>
           <li className="flex items-center gap-1.5">
-            <span className="text-pink-500">✔</span> Dodo collés blottis toute la nuit 💤
+            <span className="text-pink-500">✔</span> {isCherie ? 'Dodo blottie dans ses bras toute la nuit 🧸' : 'Dodo collés blottis toute la nuit 💤'}
           </li>
           <li className="flex items-center gap-1.5">
             <span className="text-pink-500">✔</span> <strong>Interdiction de te dire non ce soir ! 👑</strong>
@@ -122,12 +126,22 @@ ${ENTRE_NOUS_QUESTIONS.map((q) => {
         </div>
       </div>
 
+      {/* Bouton pour aller voir les réponses partagées */}
+      <Link
+        href="/reponses"
+        className="w-full bg-gradient-to-r from-pink-500 to-rose-500 hover:opacity-95 text-white font-extrabold py-3 px-5 rounded-2xl text-xs shadow-md shadow-pink-500/25 transition-all flex items-center justify-center gap-2 mb-4 hover:scale-[1.01]"
+      >
+        <span>📖</span>
+        <span>Découvrir toutes nos réponses partagées</span>
+        <span>➜</span>
+      </Link>
+
       <div className="text-xs font-bold text-gray-600 text-left mb-2 px-1">
         📜 Tes 20 réponses enregistrées :
       </div>
 
       {/* Boîte de défilement des 20 réponses */}
-      <div className="bg-[#fff9fa] border-2 border-dashed border-pink-300 rounded-2xl p-4 text-left text-xs space-y-3 mb-4 shadow-xs max-h-[240px] overflow-y-auto">
+      <div className="bg-[#fff9fa] border-2 border-dashed border-pink-300 rounded-2xl p-4 text-left text-xs space-y-3 mb-4 shadow-xs max-h-[220px] overflow-y-auto">
         {ENTRE_NOUS_QUESTIONS.map((q) => (
           <div key={q.id} className="pb-2 border-b border-pink-100 last:border-b-0">
             <span className="font-bold text-pink-600 block mb-0.5">
@@ -140,7 +154,7 @@ ${ENTRE_NOUS_QUESTIONS.map((q) => {
         ))}
       </div>
 
-      {/* Bouton secondaire de copie si besoin */}
+      {/* Boutons secondaires */}
       <div className="flex flex-col gap-2">
         <button
           onClick={handleCopy}

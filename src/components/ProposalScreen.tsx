@@ -5,14 +5,25 @@ import confetti from 'canvas-confetti';
 
 interface ProposalScreenProps {
   userName: string;
+  onSelectUser: (name: string) => void;
   onAccept: () => void;
 }
 
-export default function ProposalScreen({ userName, onAccept }: ProposalScreenProps) {
+export default function ProposalScreen({ userName, onSelectUser, onAccept }: ProposalScreenProps) {
   const [noClicks, setNoClicks] = useState(0);
   const [isCrying, setIsCrying] = useState(false);
 
-  const refusalQuotes = [
+  const isCherie = userName === 'Sa Chérie';
+
+  const refusalQuotes = isCherie ? [
+    "Même pas pour un petit jeu pour ton Soulmate ? 🥺",
+    "Attends, ton doigt a glissé non ? 💔",
+    "Regarde le chaton comme il est triste 😭",
+    "Allez ma chérie, s'il te plaît... 👉👈",
+    "Impossible, tu as trop envie de lui faire plaisir ! 😉",
+    "Erreur 404 : Le bouton NON est en panne 💕",
+    "C'est un jeu rien que pour vous deux, dis OUI ! 🥰"
+  ] : [
     `Même pas pour un petit jeu avec ta chérie ${userName} ? 🥺`,
     "Attends, ton doigt a glissé non ? 💔",
     "Regarde le chaton comme il est triste 😭",
@@ -58,12 +69,42 @@ export default function ProposalScreen({ userName, onAccept }: ProposalScreenPro
         « Entre Nous » 💖
       </h1>
 
+      {/* Sélecteur de joueur : Soulmate ou Sa Chérie */}
+      <div className="w-full max-w-xs my-3 bg-pink-50/80 p-1.5 rounded-2xl border border-pink-100 shadow-inner flex gap-1.5">
+        <button
+          type="button"
+          onClick={() => onSelectUser('Soulmate')}
+          className={`flex-1 py-2 px-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+            userName === 'Soulmate'
+              ? 'bg-pink-500 text-white shadow-md shadow-pink-500/25 scale-[1.02]'
+              : 'text-gray-600 hover:text-pink-600 hover:bg-white/60'
+          }`}
+        >
+          <span>👑</span>
+          <span>Mon Soulmate</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => onSelectUser('Sa Chérie')}
+          className={`flex-1 py-2 px-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+            userName === 'Sa Chérie'
+              ? 'bg-pink-500 text-white shadow-md shadow-pink-500/25 scale-[1.02]'
+              : 'text-gray-600 hover:text-pink-600 hover:bg-white/60'
+          }`}
+        >
+          <span>🎀</span>
+          <span>Sa Chérie</span>
+        </button>
+      </div>
+
       <div className="text-xs font-bold text-pink-400 mb-2">
-        Spécialement pour {userName} 💍
+        {isCherie ? 'Tu réponds pour ton Soulmate 💍' : `Spécialement pour ${userName} 💍`}
       </div>
 
       <p className="text-xs text-gray-600 mb-4 max-w-xs leading-relaxed font-medium">
-        Un espace rien qu’à nous deux. Réponds sincèrement, partage tes pensées et découvre de nouvelles facettes de ce qu'on partage. ❤️
+        {isCherie
+          ? "Un espace rien qu’à vous deux. Réponds sincèrement, partage tes pensées et confie ton cœur à ton Soulmate. ❤️"
+          : "Un espace rien qu’à nous deux. Réponds sincèrement, partage tes pensées et découvre de nouvelles facettes de ce qu'on partage. ❤️"}
       </p>
 
       {/* SVG Chaton Kawaii avec boîte soignée */}
